@@ -1,0 +1,595 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-12 col-md-6 col-lg-6 mx-auto">
+      <div class="card my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign up</h5>
+          <form
+            [formGroup]="registerForm"
+            (submit)="submitForm($event, registerForm.value)"
+          >
+            <div class="form-group">
+              <label for="nameInput"
+                >Name<span
+                  style="color: red"
+                  *ngIf="
+                    registerForm.controls['name'].errors?.required &&
+                    registerForm.controls['name'].errors?.pattern
+                  "
+                  >*</span
+                ></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                placeholder="Enter Name"
+                pattern="[a-zA-Z][a-zA-Z0-9\s]*"
+                required
+                title="Enter ur name"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('name').hasError('required') &&
+                  registerForm.get('name').touched
+                "
+              >
+                Name is required
+              </span>
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('name').hasError('pattern') &&
+                  registerForm.get('name').touched
+                "
+              >
+                Name must be start with character
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="nameInput"
+                >Date Of Birth<span
+                  style="color: rgb(80, 46, 46)"
+                  *ngIf="registerForm.controls['bod'].errors?.required"
+                  >*</span
+                ></label
+              >
+
+              <input
+                type="text"
+                class="form-control"
+                data-date-inline-picker="true"
+                name="bod"
+                formControlName="bod"
+                #dp="bsDatepicker"
+                bsDatepicker
+                (bsValue)="(myDateValue)"
+                placeholder="Date of Birth"
+                id="bod"
+                required
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('bod').hasError('required') &&
+                  registerForm.get('bod').touched
+                "
+              >
+                Birth of Date is required
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="nameInput"
+                >Address<span
+                  style="color: red"
+                  *ngIf="
+                    registerForm.controls['add'].errors?.required ||
+                    registerForm.controls['add'].errors?.pattern
+                  "
+                  >*</span
+                ></label
+              >
+              <textarea
+                class="form-control"
+                minlength="5"
+                id="address"
+                pattern="[a-zA-Z0-9][a-zA-Z0-9-/,\s]*"
+                placeholder="Enter Address"
+                name="add"
+                required
+                formControlName="add"
+              ></textarea>
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('add').hasError('required') &&
+                  registerForm.get('add').touched
+                "
+              >
+                Address is required
+              </span>
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('add').hasError('pattern') &&
+                  registerForm.get('add').touched
+                "
+              >
+                Valid Address required
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="nameInput"
+                >Mobile No.<span
+                  style="color: #ff0000"
+                  *ngIf="
+                    registerForm.controls['mono'].errors?.required ||
+                    registerForm.controls['mono'].errors?.pattern
+                  "
+                  >*</span
+                ></label
+              >
+              <input
+                type="text"
+                id="mono"
+                class="form-control"
+                pattern="[0-9][0-9\s{10}]*"
+                placeholder="Enter Mobile Number"
+                maxlength="10"
+                minlength="10"
+                name="mono"
+                required
+                formControlName="mono"
+                title="Number Only"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('mono').hasError('required') &&
+                  registerForm.get('mono').touched
+                "
+              >
+                Mobile Number is required
+              </span>
+              <span
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('mono').hasError('pattern') &&
+                  registerForm.get('mono').touched
+                "
+              >
+                Mobile Number must be 10 Digit Number
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="nameInput"
+                >Gender<span
+                  style="color: red"
+                  *ngIf="registerForm.controls['gender'].errors?.required"
+                  >*</span
+                ></label
+              >&nbsp;
+              <input
+                type="radio"
+                id="gender"
+                name="gender"
+                value="Male"
+                formControlName="gender"
+              />Male &nbsp; &nbsp; &nbsp;
+              <input
+                type="radio"
+                id="genderF"
+                name="gender"
+                value="Female"
+                formControlName="gender"
+              />Female
+              <div
+                class="text-danger"
+                *ngIf="
+                  registerForm.get('gender').hasError('required') &&
+                  registerForm.get('gender').touched
+                "
+              >
+                Select Any one
+              </div>
+            </div>
+
+            <div *ngIf="!ind">
+              <!--_______ EMAIL_______________ -->
+              <div class="form-group">
+                <label for="nameInput"
+                  >E-mail<span
+                    style="color: red"
+                    *ngIf="
+                      registerForm.controls['mail'].errors?.required ||
+                      registerForm.controls['mail'].errors?.email ||
+                      registerForm.controls['mail'].errors?.pattern
+                    "
+                    >*</span
+                  ></label
+                >
+                <div class="input-group with-focus">
+                  <input
+                    class="form-control"
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    formControlName="mail"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    #input
+                    (input)="input.value = $event.target.value.toLowerCase()"
+                    (input)="EmailCheck($event.target.value)"
+                    required
+                  />
+                  <!-- (input)="emailDup($event.target.value)" -->
+                </div>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('mail').hasError('required') &&
+                    registerForm.get('mail').touched
+                  "
+                >
+                  E-mail is required
+                </span>
+
+                <!--  <span class="text-danger"
+                  *ngIf="registerForm.get('mail').hasError('email') && registerForm.get('mail').touched ">
+                  Enter e-mail proper format Address
+                </span> -->
+
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('mail').hasError('pattern') &&
+                    registerForm.get('mail').touched
+                  "
+                >
+                  Enter Valid email
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="nameInput"
+                  >Password<span
+                    style="color: red"
+                    *ngIf="
+                      registerForm.controls['pass'].errors?.required ||
+                      registerForm.controls['pass'].errors?.pattern
+                    "
+                    >*</span
+                  ></label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  name="pass"
+                  passwordToggle
+                  placeholder="Enter Password"
+                  ng-pattern="/^[0-9]{6,20}$/"
+                  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                  autocomplete="off"
+                  minlength="6"
+                  formControlName="pass"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                  required
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('pass').hasError('required') &&
+                    registerForm.get('pass').touched
+                  "
+                >
+                  Password is required
+                </span>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('pass').hasError('pattern') &&
+                    registerForm.get('pass').touched
+                  "
+                >
+                  Password must be min 6 Digit required
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="nameInput"
+                  >Confirm Password<span
+                    style="color: red"
+                    *ngIf="
+                      registerForm.controls['cpass'].errors?.required ||
+                      registerForm.controls['cpass'].errors?.equalTo
+                    "
+                    >*</span
+                  ></label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  id="conf_password"
+                  name="cpass"
+                  placeholder="Enter Confirm Password"
+                  autocomplete="off"
+                  formControlName="cpass"
+                  required
+                />
+
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.controls['cpass'].hasError('required') &&
+                    (registerForm.controls['cpass'].dirty ||
+                      registerForm.controls['cpass'].touched)
+                  "
+                >
+                  This field is required
+                </div>
+
+                <span
+                  *ngIf="!registerForm.controls['cpass'].hasError('required')"
+                >
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      registerForm.controls['cpass'].hasError('equalTo') &&
+                      (registerForm.controls['cpass'].dirty ||
+                        registerForm.controls['cpass'].touched)
+                    "
+                  >
+                    Passwords do not match</span
+                  > </span
+                ><br />
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  id="btnreg"
+                  type="submit"
+                >
+                  Register
+                </button>
+                <!-- <button class="btn btn-lg btn-info btn-block text-uppercase" id="btnadduser" type="button" (click)="
+              AddUser()" [routerLink]="['/dashboard']" >Add User</button> -->
+                <button
+                  [hidden]="true"
+                  type="button"
+                  class="btn btn-lg btn-success btn-block text-uppercase"
+                  id="btnaddUser"
+                  type="button"
+                  [routerLink]="['/dashboard']"
+                  routerLinkActive="router-link-active"
+                >
+                  Add user
+                </button>
+                <button
+                  [hidden]="true"
+                  type="button"
+                  class="btn btn-lg btn-success btn-block text-uppercase"
+                  id="btnupdate"
+                  type="button"
+                  (click)="openModal(template)"
+                >
+                  Update
+                </button>
+                <ng-template #template>
+                  <div class="modal-body text-center">
+                    <p>Do you want to Edit?</p>
+                    <button
+                      type="button"
+                      class="btn btn-default"
+                      (click)="updateRecord()"
+                    >
+                      Yes
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="decline()"
+                    >
+                      No
+                    </button>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+
+            <div *ngIf="ind">
+              <div class="form-group">
+                <label for="nameInput"
+                  >E-mail<span
+                    style="color: red"
+                    *ngIf="
+                      registerForm.controls['mail'].errors?.required ||
+                      registerForm.controls['mail'].errors?.email ||
+                      registerForm.controls['mail'].errors?.pattern
+                    "
+                    >*</span
+                  ></label
+                >
+                <div class="input-group with-focus">
+                  <input
+                    class="form-control"
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    formControlName="mail"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    #input
+                    (input)="input.value = $event.target.value.toLowerCase()"
+                    (input)="EmailCheck($event.target.value)"
+                    required
+                    readonly
+                  />
+                  <!-- (input)="emailDup($event.target.value)" -->
+                </div>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('mail').hasError('required') &&
+                    registerForm.get('mail').touched
+                  "
+                >
+                  E-mail is required
+                </span>
+
+                <!--  <span class="text-danger"
+                  *ngIf="registerForm.get('mail').hasError('email') && registerForm.get('mail').touched ">
+                  Enter e-mail proper format Address
+                </span> -->
+
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('mail').hasError('pattern') &&
+                    registerForm.get('mail').touched
+                  "
+                >
+                  Enter Valid email
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="nameInput"
+                  >Password<span
+                    style="color: red"
+                    *ngIf="
+                      registerForm.controls['pass'].errors?.required ||
+                      registerForm.controls['pass'].errors?.pattern
+                    "
+                    >*</span
+                  ></label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  name="pass"
+                  passwordToggle
+                  placeholder="Enter Password"
+                  ng-pattern="/^[0-9]{6,20}$/"
+                  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                  autocomplete="off"
+                  minlength="6"
+                  formControlName="pass"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                  required
+                  readonly
+                />
+
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('pass').hasError('required') &&
+                    registerForm.get('pass').touched
+                  "
+                >
+                  Password is required
+                </span>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.get('pass').hasError('pattern') &&
+                    registerForm.get('pass').touched
+                  "
+                >
+                  Minimum Password Length must be 6
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="nameInput"
+                  >Confirm Password<span
+                    style="color: red"
+                    *ngIf="
+                      registerForm.controls['cpass'].errors?.required ||
+                      registerForm.controls['cpass'].errors?.equalTo
+                    "
+                    >*</span
+                  ></label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  id="conf_password"
+                  name="cpass"
+                  placeholder="Enter Confirm Password"
+                  autocomplete="off"
+                  formControlName="cpass"
+                  required
+                  readonly
+                />
+
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    registerForm.controls['cpass'].hasError('required') &&
+                    (registerForm.controls['cpass'].dirty ||
+                      registerForm.controls['cpass'].touched)
+                  "
+                >
+                  This field is required
+                </div>
+
+                <span
+                  *ngIf="!registerForm.controls['cpass'].hasError('required')"
+                >
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      registerForm.controls['cpass'].hasError('equalTo') &&
+                      (registerForm.controls['cpass'].dirty ||
+                        registerForm.controls['cpass'].touched)
+                    "
+                  >
+                    Passwords do not match</span
+                  >
+                </span>
+              </div>
+              <button
+                *ngIf="ind; index"
+                [hidden]="true"
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                id="btnreg"
+                type="submit"
+              >
+                Register
+              </button>
+              <button
+                type="button"
+                class="btn btn-lg btn-success btn-block text-uppercase"
+                id="btnupdate"
+                type="button"
+                (click)="openModal(template)"
+              >
+                Update
+              </button>
+              <ng-template #template>
+                <div class="modal-body text-center">
+                  <p>Do you want to Update?</p>
+                  <button
+                    type="button"
+                    class="btn btn-default"
+                    (click)="updateRecord()"
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="decline()"
+                  >
+                    No
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

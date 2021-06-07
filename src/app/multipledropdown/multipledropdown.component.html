@@ -1,0 +1,43 @@
+<div class="container">
+  <form [formGroup]="myForm" (submit)="Submit()">
+    <div class="row content-center">
+      <div class="col-1"></div>
+      <div class="col-3">
+        
+          <mat-form-field>
+            <mat-label>Select Brand</mat-label>
+            <mat-select (valueChange)="brandChange($event)" (ngModel)="selectedBrands" name="carsss">
+              <mat-option *ngFor="let c of CarBrand; let i index" [value]="c.car">{{ c.car }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="co-3">
+          <mat-form-field>
+            <mat-label>Select Model</mat-label>
+            <mat-select (valueChange)="modelChange($event)" (ngModel)="selectedModels" name="modelsss">
+              <mat-option *ngFor='let modl of model; let i index' [value]="modl.model_name"> {{ modl.model_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Select Colour</mat-label>
+            <mat-select multiple (valueChange)="selectcolour($event)" (ngModel)="selectedColour" name="colorsss">
+              <mat-option *ngFor='let colr of color; let i index' [value]="colr"> {{colr.color}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-success btn-md my-1" [disabled]="!myForm.valid">Submit</button>
+          <!--   <button class= "btn btn-primary" (click)="btnSave()">Submit</button>    -->
+         <!--  <div *ngFor=" let colr of listData; let i = index">
+            {{color}}
+          </div> -->
+        </div>
+      </div>
+  </form>
+ 
+</div>
+

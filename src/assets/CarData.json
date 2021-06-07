@@ -1,0 +1,93 @@
+[
+    {
+        "car": "JAGUAR",
+        "car_id": 1,
+        "model": [
+            {
+                "model_name": "Jaguar XF",
+                "model_id": 1
+            },
+            {
+                "model_name": "Jaguar XL",
+                "model_id": 2
+            },
+            {
+                "model_name": "Jaguar XE",
+                "model_id": 3
+            }
+        ],
+        "colors": [
+            {
+                "color": "Dark Black"
+            },
+            {
+                "color": "Hot Red"
+            },
+            {
+                "color": "White"
+            }
+        ]
+    },
+    {
+        "car": "AUDI",
+        "car_id": 2,
+        "model": [
+            {
+                "model_name": "Audi R8",
+                "model_id": 1
+            },
+            {
+                "model_name": "Audi S5",
+                "model_id": 2
+            },
+            {
+                "model_name": "Audi A6",
+                "model_id": 3
+            },
+            {
+                "model_name": "Audi Q5",
+                "model_id": 4
+            },
+            {
+                "model_name": "Audi Q3",
+                "model_id": 5
+            }
+        ],
+        "colors": [
+            {
+                "color": "Yellow"
+            },
+            {
+                "color": "Green"
+            },
+            {
+                "color": "Purpul"
+            }
+        ]
+    },
+    {
+        "car": "BMW",
+        "car_id": 3,
+        "model": [
+            {
+                "model_name": "X1",
+                "model_id": 1
+            },
+            {
+                "model_name": "Z4",
+                "model_id": 2
+            }
+        ],
+        "colors": [
+            {
+                "color": "Gray"
+            },
+            {
+                "color": "Light Pink"
+            },
+            {
+                "color": "Brown"
+            }
+        ]
+    }
+]

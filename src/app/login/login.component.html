@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <div class="block-center mt-4 wd-xl">
+    <!-- START card-->
+    <div class="card card-flat col-md-3 mx-auto">
+      <div class="card-header text-center logobg">SIGN IN TO CONTINUE
+      </div>
+      <div class="card-body">
+        <p class="text-center py-2"></p>
+        <form [formGroup]="loginForm" (submit)="submitForm($event,loginForm.value)">
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <input class="form-control" type="email" name="email" placeholder="admin@gmail.com" formControlName="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #input
+                (input)="input.value=$event.target.value.toLowerCase()" required /> 
+              <!-- <input class="form-control" id="emailid" type="email" name="email" placeholder=""
+              autocomplete="off" formControlName="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required /> -->
+              <div class="input-group-append">
+                  <span class="input-group-text text-muted bg-transparent border-left-0">
+                      <em class="fa fa-envelope"></em>
+                    </span>
+              </div>
+            </div>
+              <span class="text-danger"
+                *ngIf="loginForm.get('mail').hasError('required') && loginForm.get('mail').touched ">
+                E-mail is required
+              </span>
+
+              <span class="text-danger"
+              *ngIf="loginForm.get('mail').hasError('email') && loginForm.get('mail').touched ">
+              Enter Valid email
+            </span>
+        </div>
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <input class="form-control " id="password"type="password" name="password" placeholder="Password"
+                formControlName="pass" required  />
+              <div class="input-group-append">
+                <span class="input-group-text text-muted bg-transparent border-left-0">
+                  <em class="fa fa-lock"></em>
+                </span>
+              </div>
+            </div>
+            <span class="text-danger"
+            *ngIf="loginForm.get('pass').hasError('required') && loginForm.get('pass').touched || loginForm.controls['pass'].errors?.pattern">
+            Password is required
+          </span>
+        </div>
+
+          <div>
+            <div class="checkbox c-checkbox float-left mt0">
+              <label>
+                <input type="checkbox" name="account_remember" />
+                <span></span>&nbsp; Remember Me</label>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-block btn-primary mt-3" type="submit">Login</button><br/>
+            
+          </div>
+          <div class="card-footer content-center"><a class="text-center"style="margin: 20%;" [routerLink]="'/register'">Need to Signup?</a></div>
+        </form>        
+      </div>
+    </div>
+    <!-- END card-->
+  </div>
+</div>

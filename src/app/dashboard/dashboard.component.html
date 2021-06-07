@@ -1,0 +1,212 @@
+<h3 class="card-title text-center">Welcome To Dashboard</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 card-body">
+      <div class="row">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">ADD USER</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ADD USER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form [formGroup]="addForm">
+                      <div class="form-group">
+          
+                        <label for="nameInput">Name<span style="color: red"
+                            *ngIf="addForm.controls['name'].errors?.required && addForm.controls['name'].errors?.pattern">*</span></label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Enter Name"
+                          pattern="[a-zA-Z][a-zA-Z0-9\s]*" required title="Enter ur name">
+                        <span class="text-danger"
+                          *ngIf="addForm.get('name').hasError('required') && addForm.get('name').touched ">
+                          Name is required
+                        </span>
+                        <span class="text-danger"
+                          *ngIf="addForm.get('name').hasError('pattern') && addForm.get('name').touched ">
+                          Name must be start with character
+                        </span>
+                      </div>
+          
+                      <div class="form-group">
+                        <label for="nameInput">Date Of Birth<span style="color: rgb(80, 46, 46)"
+                            *ngIf="addForm.controls['bod'].errors?.required">*</span></label>
+          
+                        <input type="text" class="form-control" data-date-inline-picker="true" name="bod" formControlName="bod"
+                          #dp="bsDatepicker" bsDatepicker (bsValue)="myDateValue" 
+                          placeholder="Date of Birth" id="bod" required>
+                        <span class="text-danger"
+                          *ngIf="addForm.get('bod').hasError('required') && addForm.get('bod').touched ">
+                          Birth of Date is required
+                        </span>
+                       
+                      </div>
+                      <div class="form-group">
+                        <label for="nameInput">Address<span style="color: red"
+                            *ngIf="addForm.controls['add'].errors?.required || addForm.controls['add'].errors?.pattern">*</span></label>
+                        <textarea class="form-control" minlength="5" id="address" 
+                        pattern ="[a-zA-Z0-9][a-zA-Z0-9-/,\s]*" placeholder="Enter Address" name="add" required
+                          formControlName="add" ></textarea>
+                        <span class="text-danger"
+                          *ngIf="addForm.get('add').hasError('required') && addForm.get('add').touched ">
+                          Address is required
+                        </span>
+                        <span class="text-danger"
+                          *ngIf="addForm.get('add').hasError('pattern') && addForm.get('add').touched ">
+                          Valid Address required
+                         </span>
+                      </div>
+          
+                      <div class="form-group">
+                        <label for="nameInput">Mobile No.<span style="color: #ff0000"
+                            *ngIf="addForm.controls['mono'].errors?.required || addForm.controls['mono'].errors?.pattern">*</span></label>
+                        <input type="text" id="mono" class="form-control" pattern="[0-9][0-9\s{10}]*" placeholder="Enter Mobile Number" maxlength="10" minlength="10"
+                          name="mono" required formControlName="mono" title="Number Only">
+                        <span class="text-danger"
+                          *ngIf="addForm.get('mono').hasError('required') && addForm.get('mono').touched ">
+                          Mobile Number is required
+                        </span>
+                        <span class="text-danger"
+                          *ngIf="addForm.get('mono').hasError('pattern') && addForm.get('mono').touched ">
+                          Mobile Number must be 10 Digit Number
+                        </span>
+                      </div>
+          
+                      <div class="form-group">
+                        <label for="nameInput">Gender<span style="color: red"
+                            *ngIf="addForm.controls['gender'].errors?.required">*</span></label>&nbsp;
+                        <input type="radio" id="gender" name="gender" value="Male" formControlName="gender">Male &nbsp; &nbsp;
+                        &nbsp;
+                        <input type="radio" id="genderF" name="gender" value="Female" formControlName="gender">Female
+                        <div class="text-danger"
+                          *ngIf="addForm.get('gender').hasError('required') && addForm.get('gender').touched ">
+                          Select Any one
+                        </div>
+          
+                      </div>
+                      
+                    <div *ngIf="!ind">
+                      
+                      <div class="form-group">
+                          <label for="nameInput">E-mail<span style="color: red" *ngIf="addForm.controls['mail'].errors?.required || addForm.controls['mail'].errors?.email ||  
+                        addForm.controls['mail'].errors?.pattern ">*</span></label>
+                          <div class="input-group with-focus">
+                            <input class="form-control" type="email" name="email" placeholder="Enter email" formControlName="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #input
+                              (input)="input.value=$event.target.value.toLowerCase()" (input)="EmailCheck($event.target.value)"
+                              required />
+                          </div>
+                          <span class="text-danger"
+                            *ngIf="addForm.get('mail').hasError('required') && addForm.get('mail').touched ">
+                            E-mail is required
+                          </span>
+            
+                          <span class="text-danger"
+                            *ngIf="addForm.get('mail').hasError('pattern') && addForm.get('mail').touched ">
+                            Enter Valid email
+                          </span>
+                        </div>
+                        
+                      <div class="form-group">
+                          <label for="nameInput">Password<span style="color: red"
+                              *ngIf="addForm.controls['pass'].errors?.required || addForm.controls['pass'].errors?.pattern ">*</span></label>
+                          <input class="form-control" type="password" id ="password" name="pass" passwordToggle placeholder="Enter Password"
+                            ng-pattern="/^[0-9]{6,20}$/"
+                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            autocomplete="off" minlength="6" formControlName="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                            required  />
+                          <span class="text-danger"
+                            *ngIf="addForm.get('pass').hasError('required') && addForm.get('pass').touched ">
+                            Password is required
+                          </span>
+                          <span class="text-danger"
+                            *ngIf="addForm.get('pass').hasError('pattern') && addForm.get('pass').touched ">
+                            Password must be min 6 Digit required
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label for="nameInput">Confirm Password<span style="color: red"
+                              *ngIf="addForm.controls['cpass'].errors?.required || addForm.controls['cpass'].errors?.equalTo">*</span></label>
+                          <input class="form-control" type="password" id="conf_password" name="cpass"
+                            placeholder="Enter Confirm Password" autocomplete="off" 
+                            formControlName="cpass" required />
+                          
+                          <div class="text-danger"
+                            *ngIf="addForm.controls['cpass'].hasError('required') && (addForm.controls['cpass'].dirty || addForm.controls['cpass'].touched)">
+                            This field is required</div>
+                          
+                          <span *ngIf="!addForm.controls['cpass'].hasError('required')">
+                            <span class="text-danger"
+                              *ngIf="addForm.controls['cpass'].hasError('equalTo') && (addForm.controls['cpass'].dirty || addForm.controls['cpass'].touched)">
+                              Passwords do not match</span>
+                          </span><br/>
+                        <button [hidden]="true" type="button" class="btn btn-lg btn-success btn-block text-uppercase" id="btnaddUser" type="button" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >Add user</button>
+                      </div>
+                    </div>           
+                    </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnreg" (click)="addUser($event,addForm.value)" class="btn btn-primary">Add</button> 
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col"></div>
+        <button type="button" class="btn btn-primary col col-sm-2" target="_self" id="btnlogout"
+          (click)="openModal(template)"><i class="fa fa-logout"></i>Logout</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p> Are you Sure to Logout?</p>
+            <button type="button" class="btn btn-default" (click)="logout()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+          </div>
+        </ng-template>
+      </div><br />
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>DOB</th>
+            <th>MOBILE</th>
+            <th>GENDER</th>
+            <th>ADDRESS</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of myNames; index as i">
+            <td>{{myNames[i]}}</td>
+            <td>{{myEmail[i]}}</td>
+            <td>{{myDOB[i]}}</td>
+            <td>{{myMobile[i]}}</td>
+            <td>{{myGender[i]}}</td>
+            <td>{{myAdd[i]}}</td>
+
+            <td><button type="button" class="btn btn-info" [routerLink]="['/register']" [queryParams]="{ind : i}"><i
+                  class="fa fa-edit"></i>Edit</button>&nbsp;</td>
+            <td><button type="button" class="btn btn-danger" (click)="openModal(template)"><i
+                  class="fa fa-trash"></i>Delete</button> </td>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Do you want to confirm?</p>
+                <button type="button" class="btn btn-default" (click)="deleteUser()">Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+              </div>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

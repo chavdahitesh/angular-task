@@ -1,0 +1,97 @@
+[
+    {
+      "car": [
+        {
+          "car_id": 1,
+          "name": "BMW"
+        },
+        {
+          "car_id": 2,
+          "name": "JAGUAR"
+        },
+        {
+          "car_id": 3,
+          "name": "AUDI"
+        },
+        {
+          "car_id": 4,
+          "name": "HYUNDAI"
+        },
+        {
+          "car_id": 5,
+          "name": "MAHENDRA"
+        },
+        {
+          "car_id": 6,
+          "name": "TOYOTA"
+        }
+      ],
+      "carmodel": [
+        {
+          "model_id": 1,
+          "empname": "BMW X1",
+          "car_id": 1
+        },
+        {
+          "model_id": 2,
+          "empname": "BMW X3",
+          "car_id": 1
+        },
+        {
+          "model_id": 3,
+          "empname": "JAGUAR XF",
+          "car_id": 2
+        },
+        {
+          "model_id": 4,
+          "empname": "JAGUAR XL",
+          "car_id": 2
+        },
+        {
+          "model_id": 5,
+          "empname": "JAGUAR XS",
+          "car_id": 2
+        },
+        {
+          "model_id": 6,
+          "empname": "AUDI A7",
+          "car_id": 3
+        },
+        {
+          "model_id": 7,
+          "empname": "AUDI A4",
+          "car_id": 3
+        },
+        {
+          "model_id": 8,
+          "empname": "HYUNNDAI i20",
+          "car_id": 4
+        },
+        {
+          "model_id": 9,
+          "empname": "i10",
+          "car_id": 4
+        },
+        {
+          "model_id": 10,
+          "empname": "Scorpio",
+          "car_id": 5
+        },
+        {
+          "model_id": 11,
+          "empname": "FORTUNER",
+          "car_id": 6
+        },
+        {
+          "model_id": 12,
+          "empname": "ABC",
+          "car_id": 6
+        },
+        {
+          "model_id": 13,
+          "empname": "Brezza",
+          "car_id": 6
+        }
+      ]
+    }
+  ]

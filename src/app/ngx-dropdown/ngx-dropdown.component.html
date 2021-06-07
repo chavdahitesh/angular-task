@@ -1,0 +1,36 @@
+<form [formGroup]="myForm">
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-12 col-md-6 col-lg-6 mx-auto">
+      <div class="card my-5 ">
+        <div class="card-body">
+          <div class="form-group">
+            <label class="control-label" for="Country">Country:</label>
+            <select *ngIf="getCountries()" [(ngModel)]="selectedCountry"
+              (change)="onSelectCountry($event.target.value)" class="form-control input" id="country" formControlName="country">
+              <option value="0">Select Country</option>
+              <option *ngFor="let country of getCountries()" value={{country.id}}>{{country.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="States">States:</label>
+            <select *ngIf="states" [(ngModel)]="selectedState" (change)="onSelectState($event.target.value)"
+              class="form-control input" id="state" formControlName="state">
+              <option value="0">Select State</option>
+              <option *ngFor="let state of states" value={{state.id}}>{{state.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="City">City:</label>
+            <select class="form-control input" id="city" formControlName="city">
+              <option *ngIf="!selectedState" value="0">Select City</option>
+              <option multiple *ngFor="let city of cities" value={{city.id}}>{{city.name}}</option>
+            </select>
+          </div>
+          <button class="btn btn-md-primary align-center">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

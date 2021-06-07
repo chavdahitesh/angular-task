@@ -1,0 +1,90 @@
+<div class="container">
+
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-2">
+        
+      </div>
+      <div class="col-8">
+
+        <div class="card text-center w-75">
+          <div class="card-header">
+            <h2>Reminder</h2>
+          </div>
+          <div class="card-body">
+            <label for="title">Task Title</label>
+            <input type="text" #new_field1 class="form-control" formControlName="ctask" name="tasktitleNAME"
+              id="tasktitleID" placeholder="Enter Task">
+            <div class="form-group">
+              <label for="option1">Task Status</label>
+              <select (change)="onChange($event.target.value )" #new_field formControlName="cstatus"
+                class="form-control" id="option1">
+                <option placeholder="Select Task" *ngFor="let list of taskStatus" value={{list.status}}>
+                  {{list.status}}
+                </option>
+              </select>
+            </div>
+            <div class="card-footer text-muted">
+              <button type="submit" class="btn btn-primary glyphicon glyphicon-remove" [disabled]="new_field.value =='' || new_field1.value ==''">SAVE</button>&nbsp;
+              <button class="btn btn-info glyphicon glyphicon-remove" pButton type="button"
+                (click)="downloadPdf()"><i class="fa fa-file-pdf-o">  </i> Download Report</button>&nbsp;<br/>      
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-11">
+          <br/>
+        <div class="search-row">
+          <input class="form-control" type="text" formControlName="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442; Search Task or Status">
+        </div>
+        <div class="table-responsive" #reportContent>
+          <table class="table table-bordered table-striped table-sm table-hover" id="my-table" data-toggle="my-table"
+            data-clicked-to-select="true">
+            <thead class="thead-dark">
+              <tr>
+                <th data-field="id">ID</th>
+                <th data-field="task">TASK</th>
+                <th data-field="status">STATUS</th>
+                <th data-field="time">TIME</th>
+              </tr>
+            </thead>
+            
+            <tbody class="table ">
+              
+              <tr ng-repeat="list in result" *ngFor="let row of saveData | filter:searchText  ; let i=index"> 
+                <td>{{ i+1 }}</td>
+                <td>
+                  <div>
+                    <input type='checkbox' id="chk" [checked]="row.cstatus == 'Completed'"
+                      (change)="changeStatus($event,i)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="strikethrough">{{row.ctask}}</label>
+                  </div>
+                </td>
+              
+                <td>{{ row.cstatus}}</td>
+                <td>{{ currenttime | date : 'MMM d, y, h:mm:ss a'}} &nbsp; &nbsp; &nbsp; <!--MMM d, y, h:mm:ss a now | date :'dd-MM-yyyy hh:mm:ss a':'+0530' -->
+                 <button type="button" (click)="openModal(template)"
+                    class="btn btn-danger glyphicon glyphicon-remove btn-rounded btn-sm my-0" value="Remove"><i class="fa fa-trash"></i>
+                  </button>
+                      <ng-template #template>
+                        <div class="modal-body text-center">
+                          <p>Do you want to Delete?</p>
+                          <button type="button" class="btn btn-default" (click)="removeRow(row)" >Yes</button>
+                          <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                        </div>
+                      </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+</div>

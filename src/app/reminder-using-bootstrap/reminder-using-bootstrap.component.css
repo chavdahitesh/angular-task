@@ -1,0 +1,27 @@
+
+input[type="checkbox"]{
+    margin-top: 0;
+    line-height: normal;
+  }
+  .table{
+    text-align: center;
+  }
+
+  input[type = checkbox]:checked + label.strikethrough{
+    text-decoration: line-through;
+    -webkit-text-fill-color: rgb(170, 84, 84);   
+  }
+ 
+ 
+  table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    text-align: center;
+  }
+ 
+.form-control::placeholder  {
+  font-family: FontAwesome ;
+}
+.table-responsive{
+  text-align: center;
+}

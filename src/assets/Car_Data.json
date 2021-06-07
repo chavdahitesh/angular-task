@@ -1,0 +1,96 @@
+[
+    {
+        "car": "JAGUAR",
+        "model": [
+            {
+                "name": "Jaguar XF",
+                "color": [
+                    "Dark Black",
+                    "Hot Red",
+                    "White"
+                ]
+            },
+            {
+                "name": "Jaguar XL",
+                "color": [
+                    "Black",
+                    "Red",
+                    "White"
+                ]
+            },
+            {
+                "name": "Jaguar XE",
+                "color": [
+                    "Blue",
+                    "Black",
+                    "White"
+                ]
+            }
+        ]
+    },
+    {
+        "car": "AUDI",
+        "model": [
+            {
+                "name": "Audi R8",
+                "color": [
+                    "Yellow",
+                    "Pink",
+                    "Blue"
+                ]
+            },
+            {
+                "name": "Audi S5",
+                "color": [
+                    "dark night",
+                    "mattel White",
+                    "Yellow"
+                ]
+            },
+            {
+                "name": "Audi A6",
+                "color": [
+                    "White",
+                    "Black",
+                    "Red"
+                ]
+            },
+            {
+                "name": "Audi Q5",
+                "color": [
+                    "Gray",
+                    "Pink",
+                    "Blue"
+                ]
+            },
+            {
+                "name": "Audi Q3",
+                "color": [
+                    "Dark Black",
+                    "White",
+                    "Gray"
+                ]
+            }
+        ]
+    },
+    {
+        "car": "BMW",
+        "model": [{
+                "name":"X1",
+                "color":[
+                    "Dark Blue",
+                    "Black",
+                    "Red"
+                    ]
+            },
+            {
+                "name":"Z4",
+                "color":[
+                    "Gray",
+                    "Blue",
+                    "Black"
+                ]
+            }
+        ]
+    }
+]
